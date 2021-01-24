@@ -1,8 +1,9 @@
+//Testing html link
 console.log("hello world");
 
 // Dictionary items
 var dictKEY = "e88ef112-883a-4f54-975c-e1af4ff0d8c3";
-var userVALUE = "run";
+var userVALUE = $("#user-input").val().trim();
 var dictURL = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" 
     + userVALUE 
     + "?key=" 
@@ -15,6 +16,22 @@ var thesURL = "https://www.dictionaryapi.com/api/v3/references/thesaurus/json/"
     + "?key=" 
     + thesKEY;
 
+// Testing DOM links
+var searchButton = $("#search-button");
+searchButton.click(function(e){
+    e.preventDefault();
+    var userVALUE = $("#user-input").val();
+
+    // catches empty field
+    if(userVALUE == null || userVALUE == ""){
+        alert("Please enter a word!");
+    } else {
+        console.log(userVALUE.trim());
+        $("#user-input").val("");
+    }
+})
+
+
 // Testing DICTIONARY 
 console.log(dictURL);
 
@@ -23,6 +40,7 @@ $.ajax({
     url: dictURL,
     dataType: "json",
     success: function(data){
+        //Testing dictionary link
         console.log('Diciontary SUCCESS');
         console.log("Full DICTIONARY response:");
         console.log(data);
@@ -37,6 +55,8 @@ $.ajax({
 
 testing THESAURUS
 works, but leaving commented out for now
+
+console.log(thesURL);
 
 $.ajax({
     type: "GET",
