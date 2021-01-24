@@ -38,14 +38,15 @@ $.ajax({
     type: "GET",
     url: dictURL,
     dataType: "json",
-    success: function(data){
-        //Testing dictionary link
-        console.log('Diciontary SUCCESS');
-        console.log("Full DICTIONARY response:");
-        console.log(data);
-        console.log("DICTIONARY: data[0].date: \n" + data[0].date);
-        console.log("data[0].shortdef: \n" + data[0].shortdef);
-    }
+}).done(function(data){
+    //Testing dictionary link
+    console.log('Diciontary SUCCESS');
+    console.log("Full DICTIONARY response:");
+    console.log(data);
+    console.log("DICTIONARY: data[0].date: \n" + data[0].date);
+    console.log("data[0].shortdef: \n" + data[0].shortdef);
+}).fail(function(){
+    console.log("failed");
 })
 
 
