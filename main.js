@@ -17,8 +17,7 @@ var thesURL = "https://www.dictionaryapi.com/api/v3/references/thesaurus/json/"
     + thesKEY;
 
 // Testing DOM links
-var searchButton = $("#search-button");
-searchButton.click(function(e){
+$("#search-button").click(function(e){
     e.preventDefault();
     var userVALUE = $("#user-input").val();
 
