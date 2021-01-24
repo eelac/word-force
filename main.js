@@ -1,15 +1,8 @@
 //Testing html link
 console.log("hello world");
 
-// Dictionary items
-var dictKEY = "e88ef112-883a-4f54-975c-e1af4ff0d8c3";
-var userVALUE = $("#user-input").val().trim();
-var dictURL = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" 
-    + userVALUE 
-    + "?key=" 
-    + dictKEY;
-
 // Thesaurus items
+var userVALUE = $("#user-input").val();
 var thesKEY = "a6fccfe6-b8af-43f4-9d56-746368f04ea1";
 var thesURL = "https://www.dictionaryapi.com/api/v3/references/thesaurus/json/" 
     + userVALUE 
@@ -26,28 +19,36 @@ $("#search-button").click(function(e){
         alert("Please enter a word!");
     } else {
         console.log(userVALUE.trim());
+        searchWord(userVALUE.trim());
         $("#user-input").val("");
     }
 })
 
+function searchWord(userVALUE){
+    // Dictionary items
+    var dictKEY = "?key=e88ef112-883a-4f54-975c-e1af4ff0d8c3";
+    var dictURL = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" 
+        + userVALUE
+        + dictKEY;
 
-// Testing DICTIONARY 
-console.log(dictURL);
+    $.ajax({
+        type: "GET",
+        url: dictURL,
+        dataType: "json",
+    }).done(function(data){
+        //Testing dictionary link
+        console.log('Dictionary SUCCESS');
+        console.log("Full DICTIONARY response:");
+        console.log(data);
+        console.log("Gets date: data[0].date: \n" + data[0].date);
+        // Not all words have etymology!
+        console.log("Gets etymology: \n" + data[0].et[0][1]);
+        console.log("Gets definitions: data[0].shortdef: \n" + data[0].shortdef);
+    }).fail(function(){
+        console.log("failed");
+    })
 
-$.ajax({
-    type: "GET",
-    url: dictURL,
-    dataType: "json",
-}).done(function(data){
-    //Testing dictionary link
-    console.log('Diciontary SUCCESS');
-    console.log("Full DICTIONARY response:");
-    console.log(data);
-    console.log("DICTIONARY: data[0].date: \n" + data[0].date);
-    console.log("data[0].shortdef: \n" + data[0].shortdef);
-}).fail(function(){
-    console.log("failed");
-})
+}
 
 
 
