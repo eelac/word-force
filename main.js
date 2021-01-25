@@ -41,13 +41,36 @@ function searchWord(userVALUE){
         console.log("Full DICTIONARY response:");
         console.log(data);
         console.log("Gets date: data[0].date: \n" + data[0].date);
+
         // Not all words have etymology!
-        console.log("Gets etymology: \n" + data[0].et[0][1]);
+        var etym = data[0].et[0][1];
+        console.log("Gets etymology: \n" + etym);
         console.log("Gets definitions: data[0].shortdef: \n" + data[0].shortdef);
+
+        historyAppend(userVALUE);
+
     }).fail(function(){
         console.log("failed");
     })
 
+}
+
+//Appends a list of history
+function historyAppend(x) {
+    var li = $("<li>");
+    var ul = $(".words-here");
+    ul.append(li.append(x));
+
+    // Added max history list limit 5
+    var maxHistory = 5;
+
+    $(".words-here").each(function(){
+        $(this).find("li").each(function(index){
+            if(index >= maxHistory){
+                $("ul > li:first-child").remove();
+            }
+        })
+    })
 }
 
 
