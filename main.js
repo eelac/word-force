@@ -67,7 +67,7 @@ function historyAppend(x) {
     $(".words-here").each(function(){
         $(this).find("li").each(function(index){
             if(index >= maxHistory){
-                $("ul > li:first-child").remove();
+                $(".words-here > li:first-child").remove();
             }
         })
     })
