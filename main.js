@@ -33,8 +33,8 @@ function searchWord(userVALUE){
 
     $.ajax({
         type: "GET",
-        url: dictURL,
-        dataType: "json",
+        url: dictURL
+        // dataType: "json",
     }).done(function(data){
         //Testing dictionary link
         console.log('Dictionary SUCCESS');
@@ -47,7 +47,21 @@ function searchWord(userVALUE){
         console.log("Gets etymology: \n" + etym);
         console.log("Gets definitions: data[0].shortdef: \n" + data[0].shortdef);
 
-        historyAppend(userVALUE);
+        // Clears Information field
+        $(".post-here").text("");
+        //Creates title with userValue
+        postAppend("<h1 class='value-text'>" + userVALUE.toLowerCase().trim() + "</h1>");
+        //Creates date
+        postAppend("<strong>Date:</strong> " + data[0].date);
+        //Creates Etymology
+        postAppend("<strong>Etymology:</strong> " + etym);
+        //Creates Definition
+        postAppend("<strong>Definition:</strong> " + data[0].shortdef);
+
+        // Creates Last 5 Search History Text
+        postAppend("<h3 class='search-history-text'><u>Last Five Search History:</u></h3>")
+        // Appends userValue into history 
+        historyAppend(userVALUE.toLowerCase().trim());
 
     }).fail(function(){
         console.log("failed");
@@ -72,6 +86,13 @@ function historyAppend(x) {
         })
     })
 }
+
+function postAppend(x) {
+    var div = $("<div>");
+    var divContainer = $(".post-here");
+    divContainer.append(div.append(x));
+}
+
 
 
 
