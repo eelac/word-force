@@ -18,6 +18,7 @@ $("#search-button").click(function(e){
     if(userVALUE == null || userVALUE == ""){
         alert("Please enter a word!");
     } else {
+        // Testing console
         console.log(userVALUE.trim());
         searchWord(userVALUE.trim());
         $("#user-input").val("");
@@ -28,46 +29,51 @@ function searchWord(userVALUE){
     // Dictionary items
     var dictKEY = "?key=e88ef112-883a-4f54-975c-e1af4ff0d8c3";
     var dictURL = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" 
-        + userVALUE
+        + userVALUE 
         + dictKEY;
 
     $.ajax({
         type: "GET",
         url: dictURL
-        // dataType: "json",
     }).done(function(data){
         //Testing dictionary link
         console.log('Dictionary SUCCESS');
         console.log("Full DICTIONARY response:");
         console.log(data);
-        console.log("Gets date: data[0].date: \n" + data[0].date);
 
-        // Not all words have etymology!
-        var etym = data[0].et[0][1];
-        console.log("Gets etymology: \n" + etym);
-        console.log("Gets definitions: data[0].shortdef: \n" + data[0].shortdef);
+        
+        //Not all words have etymology!
+        // Catches if random nonesense is input
+        if(data.length === 0) {
+            alert("Please enter a valid entry.");
+        } else if(!data[0].et) {
+            // Catches any word that doesn't have an etymology array
+            alert("Please enter the base word.");
+        } else {
+            var etym = uncurl(data[0].et[0][1]);
+            // Clears Information field
+            $(".post-here").text("");
+            // Creates title with userValue
+            postAppend("<h1 class='value-text'>" + userVALUE.toLowerCase().trim() + "</h1>");
+            // Creates date
+            postAppend("<strong>Date:</strong> " + data[0].date);
+            // Creates Etymology
+            postAppend("<strong>Etymology:</strong> " + etym);
+            // Creates Definition
+            postAppend("<strong>Definition:</strong> " + data[0].shortdef);
 
-        // Clears Information field
-        $(".post-here").text("");
-        //Creates title with userValue
-        postAppend("<h1 class='value-text'>" + userVALUE.toLowerCase().trim() + "</h1>");
-        //Creates date
-        postAppend("<strong>Date:</strong> " + data[0].date);
-        //Creates Etymology
-        postAppend("<strong>Etymology:</strong> " + etym);
-        //Creates Definition
-        postAppend("<strong>Definition:</strong> " + data[0].shortdef);
-
-        // Creates Last 5 Search History Text
-        postAppend("<h3 class='search-history-text'><u>Last Five Search History:</u></h3>")
-        // Appends userValue into history 
-        historyAppend(userVALUE.toLowerCase().trim());
+            // Creates Last 5 Search History Text
+            postAppend("<h3 class='search-history-text'><u>Last Five Search History:</u></h3>")
+            // Appends userValue into history 
+            historyAppend(userVALUE.toLowerCase().trim());
+        }
 
     }).fail(function(){
         console.log("failed");
     })
 
 }
+
 
 //Appends a list of history
 function historyAppend(x) {
@@ -87,12 +93,18 @@ function historyAppend(x) {
     })
 }
 
+// Appends the required list of the word typed onto the page, above the history
 function postAppend(x) {
     var div = $("<div>");
     var divContainer = $(".post-here");
     divContainer.append(div.append(x));
 }
 
+// Removes curls around API data's {it}...{/it}
+function uncurl(x) {
+    var uncurled = x.replaceAll("{it}", "<i>").replaceAll("{/it}", "</i>");
+    return uncurled;
+}
 
 
 
