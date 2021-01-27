@@ -55,12 +55,12 @@ function searchWord(userVALUE){
             $(".post-here").text("");
             // Creates title with userValue
             postAppend("<h1 class='value-text'>" + userVALUE.toLowerCase().trim() + "</h1>");
+            // Creates Definition
+            postAppend("<strong>Definition:</strong> " + data[0].shortdef);
             // Creates date
             postAppend("<strong>Date:</strong> " + data[0].date);
             // Creates Etymology
             postAppend("<strong>Etymology:</strong> " + etym);
-            // Creates Definition
-            postAppend("<strong>Definition:</strong> " + data[0].shortdef);
 
             // Creates Last 5 Search History Text
             postAppend("<h3 class='search-history-text'><u>Last Five Search History:</u></h3>")
@@ -73,7 +73,6 @@ function searchWord(userVALUE){
     })
 
 }
-
 
 //Appends a list of history
 function historyAppend(x) {
@@ -102,10 +101,47 @@ function postAppend(x) {
 
 // Removes curls around API data's {it}...{/it}
 function uncurl(x) {
-    var uncurled = x.replaceAll("{it}", "<i>").replaceAll("{/it}", "</i>");
+    var uncurled = x
+        .replaceAll("{it}", "<i>")
+        .replaceAll("{/it}", "</i>");
     return uncurled;
 }
 
+// changes opacity of the cards
+$(".card-show").css("opacity", "0.6").css("transition", "0.5s");
+$(".card-show").on("mouseover", function() {
+    $(this).css("opacity", "1");
+})
+$(".card-show").on("mouseout", function() {
+    $(this).css("opacity", "0.6");
+})
+
+// Click cards start fuctions
+$(".card-show").click(function(){
+    var dataValue = $(this).data("value");
+    console.log(dataValue);
+    if(dataValue === 1){
+        // old norse / dutch /scandinavian
+        console.log("this is the first card");
+        var norse = ["anger", "cake", "viking", "reindeer", "outlaw", "raft", "bumpkin", "awkward", "bag", "dirt", "die", "caboose"];
+        searchWord(looper(norse));
+    } else if(dataValue === 2){
+        // chinese / japanese
+        console.log("This is the second card");
+        var chinese = ["brainwash", "ketchup", "typhoon", "chowchow", "kumquat", "ramen", "tycoon", "wok", "tofu", "tea", "rickshaw"];
+        searchWord(looper(chinese));
+    } else {
+        // spanish
+        console.log("This is the third card");
+        var spanish = ["banana", "cockroach", "crimson", "mustang", "embargo", "guacamole", "guerrilla", "hurricane", "macho", "mosquito", "patio"];
+        searchWord(looper(spanish));
+    }
+})
+
+function looper(array){
+    var random = Math.floor(Math.random() * array.length);
+    return array[random];
+}
 
 
 /*
