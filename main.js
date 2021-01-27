@@ -1,7 +1,7 @@
 //Testing html link
 console.log("hello world");
 
-// Testing DOM links
+// Click or push enter to work
 $("#search-button").click(function(e){
     e.preventDefault();
     var userVALUE = $("#user-input").val();
@@ -95,6 +95,37 @@ function searchThesaurus(userVALUE){
     })
 }
 
+// changes opacity of the cards
+$(".card-show").css("opacity", "0.6").css("transition", "0.5s");
+$(".card-show").on("mouseover", function() {
+    $(this).css("opacity", "1");
+})
+$(".card-show").on("mouseout", function() {
+    $(this).css("opacity", "0.6");
+})
+
+// Click cards start fuctions
+$(".card-show").click(function(){
+    var dataValue = $(this).data("value");
+    console.log(dataValue);
+    if(dataValue === 1){
+        // old norse / dutch /scandinavian
+        console.log("this is the first card");
+        var norse = ["anger", "cake", "viking", "reindeer", "outlaw", "raft", "bumpkin", "awkward", "bag", "dirt", "die", "caboose"];
+        searchWord(looper(norse));
+    } else if(dataValue === 2){
+        // chinese / japanese
+        console.log("This is the second card");
+        var chinese = ["brainwash", "ketchup", "typhoon", "chowchow", "kumquat", "ramen", "tycoon", "wok", "tofu", "tea", "rickshaw"];
+        searchWord(looper(chinese));
+    } else {
+        // spanish
+        console.log("This is the third card");
+        var spanish = ["banana", "cockroach", "crimson", "mustang", "embargo", "guacamole", "guerrilla", "hurricane", "macho", "mosquito", "patio"];
+        searchWord(looper(spanish));
+    }
+})
+
 //Appends a list of history
 function historyAppend(x) {
     var li = $("<li>");
@@ -127,37 +158,6 @@ function uncurl(x) {
         .replaceAll("{/it}", "</i>");
     return uncurled;
 }
-
-// changes opacity of the cards
-$(".card-show").css("opacity", "0.6").css("transition", "0.5s");
-$(".card-show").on("mouseover", function() {
-    $(this).css("opacity", "1");
-})
-$(".card-show").on("mouseout", function() {
-    $(this).css("opacity", "0.6");
-})
-
-// Click cards start fuctions
-$(".card-show").click(function(){
-    var dataValue = $(this).data("value");
-    console.log(dataValue);
-    if(dataValue === 1){
-        // old norse / dutch /scandinavian
-        console.log("this is the first card");
-        var norse = ["anger", "cake", "viking", "reindeer", "outlaw", "raft", "bumpkin", "awkward", "bag", "dirt", "die", "caboose"];
-        searchWord(looper(norse));
-    } else if(dataValue === 2){
-        // chinese / japanese
-        console.log("This is the second card");
-        var chinese = ["brainwash", "ketchup", "typhoon", "chowchow", "kumquat", "ramen", "tycoon", "wok", "tofu", "tea", "rickshaw"];
-        searchWord(looper(chinese));
-    } else {
-        // spanish
-        console.log("This is the third card");
-        var spanish = ["banana", "cockroach", "crimson", "mustang", "embargo", "guacamole", "guerrilla", "hurricane", "macho", "mosquito", "patio"];
-        searchWord(looper(spanish));
-    }
-})
 
 function looper(array){
     var random = Math.floor(Math.random() * array.length);
