@@ -95,9 +95,11 @@ function searchThesaurus(userVALUE){
 
 // changes opacity of the cards
 $(".card-show").css("opacity", "0.6").css("transition", "0.5s");
+// on mouseover changes darkens opacity
 $(".card-show").on("mouseover", function() {
     $(this).css("opacity", "1");
 })
+// on mouseout, changes opacity back to  light
 $(".card-show").on("mouseout", function() {
     $(this).css("opacity", "0.6");
 })
@@ -125,10 +127,10 @@ $(".card-show").click(function(){
 })
 
 //Appends a list of history
-function historyAppend(x) {
+function historyAppend(text) {
     var li = $("<li>");
     var ul = $(".history-here");
-    ul.append(li.append(x));
+    ul.append(li.append(text));
 
     // Added max history list limit 5
     var maxHistory = 5;
