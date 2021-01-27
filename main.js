@@ -65,7 +65,34 @@ function searchWord(userVALUE){
     }).fail(function(){
         console.log("failed");
     })
+}
 
+// Thesaurus function
+function searchThesaurus(userVALUE){
+    // Thesaurus items
+    var thesKEY = "?key=a6fccfe6-b8af-43f4-9d56-746368f04ea1";
+    var thesURL = "https://www.dictionaryapi.com/api/v3/references/thesaurus/json/" 
+        + userVALUE 
+        + thesKEY;
+
+    //testing THESAURUS
+    $.ajax({
+        type: "GET",
+        url: thesURL,
+        dataType: "json",
+    }).done(function(data) {
+        console.log("success");
+        console.log("Thesaurus: ");
+        console.log(data[0].meta.syns[0]);
+        // Clears synonym field
+        $(".synonym-here").text("");
+        var syns = data[0].meta.syns[0];
+        var div = $("<div>");
+        var divContainer = $(".synonym-here");
+        divContainer.append(div.append("<strong>Synonyms:</strong> " + syns.join(", ")));
+    }).fail(function() {
+        console.log("thesaurus failed");
+    })
 }
 
 //Appends a list of history
@@ -135,31 +162,4 @@ $(".card-show").click(function(){
 function looper(array){
     var random = Math.floor(Math.random() * array.length);
     return array[random];
-}
-
-function searchThesaurus(userVALUE){
-    // Thesaurus items
-    var thesKEY = "?key=a6fccfe6-b8af-43f4-9d56-746368f04ea1";
-    var thesURL = "https://www.dictionaryapi.com/api/v3/references/thesaurus/json/" 
-        + userVALUE 
-        + thesKEY;
-
-    //testing THESAURUS
-    $.ajax({
-        type: "GET",
-        url: thesURL,
-        dataType: "json",
-    }).done(function(data) {
-        console.log("success");
-        console.log("Thesaurus: ");
-        console.log(data[0].meta.syns[0]);
-        // Clears synonym field
-        $(".synonym-here").text("");
-        var syns = data[0].meta.syns[0];
-        var div = $("<div>");
-        var divContainer = $(".synonym-here");
-        divContainer.append(div.append("<strong>Synonyms:</strong> " + syns.join(", ")));
-    }).fail(function() {
-        console.log("thesaurus failed");
-    })
 }
