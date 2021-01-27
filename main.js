@@ -45,13 +45,13 @@ function searchWord(userVALUE){
             // Clears Information field
             $(".post-here").text("");
             // Creates title with userValue
-            postAppend("<h1 class='value-text'>" + userVALUE.toLowerCase().trim() + "</h1>");
+            postAppend("<h1 class='value-text'>" + userVALUE.toLowerCase().trim() + "</h1>", ".post-here");
             // Creates Definition
-            postAppend("<strong>Definition:</strong> " + data[0].shortdef);
+            postAppend("<strong>Definition:</strong> " + data[0].shortdef, ".post-here");
             // Creates date
-            postAppend("<strong>Date:</strong> " + data[0].date);
+            postAppend("<strong>Date:</strong> " + data[0].date, ".post-here");
             // Creates Etymology
-            postAppend("<strong>Etymology:</strong> " + etym);
+            postAppend("<strong>Etymology:</strong> " + etym, ".post-here");
 
             // Creates synonyms list
             searchThesaurus(userVALUE);
@@ -87,9 +87,7 @@ function searchThesaurus(userVALUE){
         // Clears synonym field
         $(".synonym-here").text("");
         var syns = data[0].meta.syns[0];
-        var div = $("<div>");
-        var divContainer = $(".synonym-here");
-        divContainer.append(div.append("<strong>Synonyms:</strong> " + syns.join(", ")));
+        postAppend("<strong>Synonyms:</strong> " + syns.join(", "), ".synonym-here");
     }).fail(function() {
         console.log("thesaurus failed");
     })
@@ -145,15 +143,15 @@ function historyAppend(x) {
 }
 
 // Appends the required list of the word typed onto the page, above the history
-function postAppend(x) {
+function postAppend(text, targetContainer) {
     var div = $("<div>");
-    var divContainer = $(".post-here");
-    divContainer.append(div.append(x));
+    var divContainer = $(targetContainer);
+    divContainer.append(div.append(text));
 }
 
 // Removes curls around API data's {it}...{/it}
-function uncurl(x) {
-    var uncurled = x
+function uncurl(text) {
+    var uncurled = text
         .replaceAll("{it}", "<i>")
         .replaceAll("{/it}", "</i>");
     return uncurled;
