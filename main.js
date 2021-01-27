@@ -1,14 +1,6 @@
 //Testing html link
 console.log("hello world");
 
-// Thesaurus items
-var userVALUE = $("#user-input").val();
-var thesKEY = "a6fccfe6-b8af-43f4-9d56-746368f04ea1";
-var thesURL = "https://www.dictionaryapi.com/api/v3/references/thesaurus/json/" 
-    + userVALUE 
-    + "?key=" 
-    + thesKEY;
-
 // Testing DOM links
 $("#search-button").click(function(e){
     e.preventDefault();
@@ -40,9 +32,8 @@ function searchWord(userVALUE){
         console.log('Dictionary SUCCESS');
         console.log("Full DICTIONARY response:");
         console.log(data);
-
-        
-        //Not all words have etymology!
+        searchThesaurus(userVALUE);
+        // Not all words have etymology!
         // Catches if random nonesense is input
         if(data.length === 0) {
             alert("Please enter a valid entry.");
@@ -62,8 +53,11 @@ function searchWord(userVALUE){
             // Creates Etymology
             postAppend("<strong>Etymology:</strong> " + etym);
 
-            // Creates Last 5 Search History Text
-            postAppend("<h3 class='search-history-text'><u>Last Five Search History:</u></h3>")
+            // Creates synonyms list
+            searchThesaurus(userVALUE);
+            $(".history-title-here").text("");
+            // Creates Last 5 Search History Title Text
+            $(".history-title-here").append("<h3 class='search-history-text'><u>Last Five Search History:</u></h3>")
             // Appends userValue into history 
             historyAppend(userVALUE.toLowerCase().trim());
         }
@@ -77,16 +71,16 @@ function searchWord(userVALUE){
 //Appends a list of history
 function historyAppend(x) {
     var li = $("<li>");
-    var ul = $(".words-here");
+    var ul = $(".history-here");
     ul.append(li.append(x));
 
     // Added max history list limit 5
     var maxHistory = 5;
 
-    $(".words-here").each(function(){
+    $(".history-here").each(function(){
         $(this).find("li").each(function(index){
             if(index >= maxHistory){
-                $(".words-here > li:first-child").remove();
+                $(".history-here > li:first-child").remove();
             }
         })
     })
@@ -143,21 +137,29 @@ function looper(array){
     return array[random];
 }
 
+function searchThesaurus(userVALUE){
+    // Thesaurus items
+    var thesKEY = "?key=a6fccfe6-b8af-43f4-9d56-746368f04ea1";
+    var thesURL = "https://www.dictionaryapi.com/api/v3/references/thesaurus/json/" 
+        + userVALUE 
+        + thesKEY;
 
-/*
-
-testing THESAURUS
-works, but leaving commented out for now
-
-console.log(thesURL);
-
-$.ajax({
-    type: "GET",
-    url: thesURL,
-    dataType: "json",
-    success: function(data){
-        console.log("Thesaurus SUCCESS");
-    }
-})
-
-*/
+    //testing THESAURUS
+    $.ajax({
+        type: "GET",
+        url: thesURL,
+        dataType: "json",
+    }).done(function(data) {
+        console.log("success");
+        console.log("Thesaurus: ");
+        console.log(data[0].meta.syns[0]);
+        // Clears synonym field
+        $(".synonym-here").text("");
+        var syns = data[0].meta.syns[0];
+        var div = $("<div>");
+        var divContainer = $(".synonym-here");
+        divContainer.append(div.append("<strong>Synonyms:</strong> " + syns.join(", ")));
+    }).fail(function() {
+        console.log("thesaurus failed");
+    })
+}
