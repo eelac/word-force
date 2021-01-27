@@ -29,10 +29,8 @@ function searchWord(userVALUE){
         url: dictURL
     }).done(function(data){
         //Testing dictionary link
-        console.log('Dictionary SUCCESS');
         console.log("Full DICTIONARY response:");
         console.log(data);
-        searchThesaurus(userVALUE);
         // Not all words have etymology!
         // Catches if random nonesense is input
         if(data.length === 0) {
@@ -57,11 +55,10 @@ function searchWord(userVALUE){
             searchThesaurus(userVALUE);
             $(".history-title-here").text("");
             // Creates Last 5 Search History Title Text
-            $(".history-title-here").append("<h3 class='search-history-text'><u>Last Five Search History:</u></h3>")
+            $(".history-title-here").append("<h3 class='search-history-text'><u>Previous Searches:</u></h3>")
             // Appends userValue into history 
             historyAppend(userVALUE.toLowerCase().trim());
         }
-
     }).fail(function(){
         console.log("failed");
     })
@@ -81,13 +78,16 @@ function searchThesaurus(userVALUE){
         url: thesURL,
         dataType: "json",
     }).done(function(data) {
-        console.log("success");
-        console.log("Thesaurus: ");
-        console.log(data[0].meta.syns[0]);
-        // Clears synonym field
-        $(".synonym-here").text("");
-        var syns = data[0].meta.syns[0];
-        postAppend("<strong>Synonyms:</strong> " + syns.join(", "), ".synonym-here");
+        console.log(data);
+        if(!data[0].meta) {
+            console.log("no synonym");
+            postAppend("<strong>Synonyms:</strong> No synonyms available.", ".synonym-here");
+        } else {
+            // Clears synonym field
+            $(".synonym-here").text("");
+            var syns = data[0].meta.syns[0];
+            postAppend("<strong>Synonyms:</strong> " + syns.join(", "), ".synonym-here");
+        }
     }).fail(function() {
         console.log("thesaurus failed");
     })
@@ -107,20 +107,16 @@ $(".card-show").on("mouseout", function() {
 // Click cards start fuctions
 $(".card-show").click(function(){
     var dataValue = $(this).data("value");
-    console.log(dataValue);
     if(dataValue === 1){
         // old norse / dutch /scandinavian
-        console.log("this is the first card");
         var norse = ["anger", "cake", "viking", "reindeer", "outlaw", "raft", "bumpkin", "awkward", "bag", "dirt", "die", "caboose"];
         searchWord(looper(norse));
     } else if(dataValue === 2){
         // chinese / japanese
-        console.log("This is the second card");
         var chinese = ["brainwash", "ketchup", "typhoon", "chowchow", "kumquat", "ramen", "tycoon", "wok", "tofu", "tea", "rickshaw"];
         searchWord(looper(chinese));
     } else {
         // spanish
-        console.log("This is the third card");
         var spanish = ["banana", "cockroach", "crimson", "mustang", "embargo", "guacamole", "guerrilla", "hurricane", "macho", "mosquito", "patio"];
         searchWord(looper(spanish));
     }
@@ -159,6 +155,7 @@ function uncurl(text) {
     return uncurled;
 }
 
+// Loops through certain arrays in random order
 function looper(array){
     var random = Math.floor(Math.random() * array.length);
     return array[random];
