@@ -1,6 +1,9 @@
 //Testing html link
 console.log("hello world");
 
+// Fades out cards by default and fades in on hover
+fadingIn(".card-show", "0.6", "1", "0.5s");
+
 // Click or push enter to work
 $("#search-button").click(function(e) {
     e.preventDefault();
@@ -17,6 +20,7 @@ $("#search-button").click(function(e) {
     }
 })
 
+// Search through API for the word and database
 function searchWord(userVALUE) {
     // Dictionary items
     var dictKEY = "?key=e88ef112-883a-4f54-975c-e1af4ff0d8c3";
@@ -94,9 +98,6 @@ function searchThesaurus(userVALUE) {
     })
 }
 
-// Fades out cards by default and fades in on hover
-fadingIn(".card-show", "0.6", "1", "0.5s");
-
 // Click cards start fuctions
 $(".card-show").click(function() {
     var dataValue = $(this).data("value");
@@ -124,6 +125,20 @@ $(".card-show").click(function() {
     }
 })
 
+// Fade out an object and fade them back in on hover
+function fadingIn(object, opacityStart, opacityEnd, time) {
+    // changes opacity of the cards
+    $(object).css("opacity", opacityStart).css("transition", time);
+    // on mouseover changes darkens opacity
+    $(object).on("mouseover", function() {
+        $(this).css("opacity", opacityEnd);
+    })
+    // on mouseout, changes opacity back to  light
+    $(object).on("mouseout", function() {
+        $(this).css("opacity", opacityStart);
+    })
+}
+
 //Appends a list of history
 function historyAppend(text) {
     $(".history-here").append($("<li>").append(text));
@@ -137,20 +152,6 @@ function historyAppend(text) {
                 $(".history-here > li:first-child").remove();
             }
         })
-    })
-}
-
-// Fade out an object and fade them back in on hover
-function fadingIn(object, opacityStart, opacityEnd, time) {
-    // changes opacity of the cards
-    $(object).css("opacity", opacityStart).css("transition", time);
-    // on mouseover changes darkens opacity
-    $(object).on("mouseover", function() {
-        $(this).css("opacity", opacityEnd);
-    })
-    // on mouseout, changes opacity back to  light
-    $(object).on("mouseout", function() {
-        $(this).css("opacity", opacityStart);
     })
 }
 
