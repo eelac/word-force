@@ -3,6 +3,7 @@ console.log("hello world");
 
 // Fades out cards by default and fades in on hover
 fadingIn(".card-show", "0.6", "1", "0.5s");
+// Removes placeholder on focus of search bar
 onFocusRemoveAttr("#user-input", "placeholder", "Enter word here");
 
 // Click or push enter to work
@@ -128,6 +129,11 @@ $(".card-show").click(function() {
 
 // Fade out an object and fade them back in on hover
 function fadingIn(object, opacityStart, opacityEnd, time) {
+    /**
+     * First it fades out the given object to the specified value and transition time,
+     * then, on mouse hover, it darkens it to the specified time. 
+     */
+
     // changes opacity of the cards
     $(object).css("opacity", opacityStart).css("transition", time);
     // on mouseover changes darkens opacity
@@ -141,7 +147,11 @@ function fadingIn(object, opacityStart, opacityEnd, time) {
 }
 
 // Removes attribute on focus and reapplies the attribute on focusout
-function onFocusRemoveAttr(object, attr, attrValue = "undefined") {
+function onFocusRemoveAttr(object, attr, attrValue) {
+    /**
+     * Removes an attribute from an object on focus in,
+     * replaces the attribute on blur.
+     */
     $(object).focus(function() {
         $(this).removeAttr(attr);
     })
@@ -150,8 +160,12 @@ function onFocusRemoveAttr(object, attr, attrValue = "undefined") {
     })
 }
 
-//Appends a list of history
+// Appends a list of history 
 function historyAppend(text) {
+    /**
+     * Appends text by creating <li> to the ul class of .history-here.
+     * Function not modular for now as it isn't need just yet.
+     */
     $(".history-here").append($("<li>").append(text));
 
     // Added max history list limit 5
