@@ -37,7 +37,7 @@ function searchWord(userVALUE){
             alert("Please enter a valid entry.");
         } else if(!data[0].et) {
             // Catches any word that doesn't have an etymology array
-            alert("Please enter the base word.");
+            alert("Check your spelling and/or enter the base word (ie: 'run' instead of 'running'");
         } else {
             var etym = uncurl(data[0].et[0][1]);
             // Clears Information field
@@ -50,12 +50,13 @@ function searchWord(userVALUE){
             postAppend("<strong>Date:</strong> " + data[0].date, ".post-here");
             // Creates Etymology
             postAppend("<strong>Etymology:</strong> " + etym, ".post-here");
+            // Creates synonym list
+            searchThesaurus(userVALUE.toLowerCase().trim());
 
-            // Creates synonyms list
-            searchThesaurus(userVALUE);
+            // Clears history field
             $(".history-title-here").text("");
             // Creates Last 5 Search History Title Text
-            $(".history-title-here").append("<h3 class='search-history-text'><u>Previous Searches:</u></h3>")
+            $(".history-title-here").append("<h3 class='search-history-text'><u>Previous Searches:</u></h3>");
             // Appends userValue into history 
             historyAppend(userVALUE.toLowerCase().trim());
         }
@@ -80,7 +81,7 @@ function searchThesaurus(userVALUE){
     }).done(function(data) {
         console.log(data);
         if(!data[0].meta) {
-            console.log("no synonym");
+            $(".synonym-here").text("");
             postAppend("<strong>Synonyms:</strong> No synonyms available.", ".synonym-here");
         } else {
             // Clears synonym field
@@ -109,15 +110,24 @@ $(".card-show").click(function(){
     var dataValue = $(this).data("value");
     if(dataValue === 1){
         // old norse / dutch /scandinavian
-        var norse = ["anger", "cake", "viking", "reindeer", "outlaw", "raft", "bumpkin", "awkward", "bag", "dirt", "die", "caboose"];
+        var norse = [
+            "anger", "cake", "viking", "reindeer", "outlaw", "raft", "bumpkin", "awkward", "bag", "dirt", 
+            "die", "caboose", "bait", "egg", "coleslaw", "cashier", "dapper", "furlough", "iceberg", "luck"
+        ];
         searchWord(looper(norse));
     } else if(dataValue === 2){
         // chinese / japanese
-        var chinese = ["brainwash", "ketchup", "typhoon", "chowchow", "kumquat", "ramen", "tycoon", "wok", "tofu", "tea", "rickshaw"];
+        var chinese = [
+            "brainwash", "ketchup", "typhoon", "chowchow", "kumquat", "ramen", "tycoon", "wok", "tofu", "tea", 
+            "rickshaw", "karaoke", "emoji", "origami", "sayonara", "wonton", "zen", "shiatsu"
+        ];
         searchWord(looper(chinese));
     } else {
         // spanish
-        var spanish = ["banana", "cockroach", "crimson", "mustang", "embargo", "guacamole", "guerrilla", "hurricane", "macho", "mosquito", "patio"];
+        var spanish = [
+            "banana", "cockroach", "crimson", "mustang", "embargo", "guacamole", "guerrilla", "hurricane", "macho", "mosquito", 
+            "patio", "alligator", "tango", "matador", "cargo", "renegade", "vanilla", "bonanza", "tomato", "torque"
+        ];
         searchWord(looper(spanish));
     }
 })
