@@ -3,6 +3,7 @@ console.log("hello world");
 
 // Fades out cards by default and fades in on hover
 fadingIn(".card-show", "0.6", "1", "0.5s");
+onFocusRemoveAttr("#user-input", "placeholder", "Enter word here");
 
 // Click or push enter to work
 $("#search-button").click(function(e) {
@@ -136,6 +137,16 @@ function fadingIn(object, opacityStart, opacityEnd, time) {
     // on mouseout, changes opacity back to  light
     $(object).on("mouseout", function() {
         $(this).css("opacity", opacityStart);
+    })
+}
+
+// Removes attribute on focus and reapplies the attribute on focusout
+function onFocusRemoveAttr(object, attr, attrValue = "undefined") {
+    $(object).focus(function() {
+        $(this).removeAttr(attr);
+    })
+    $(object).focusout(function() {
+        $(this).attr(attr, attrValue);
     })
 }
 
