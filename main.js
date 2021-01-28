@@ -187,12 +187,9 @@ function postAppend(text, targetContainer) {
 
 // Removes curls around API data's {it}...{/it}
 function uncurl(text) {
-    return text.replaceAll("{it}", "<i>")
-        .replaceAll("{/it}", "</i>")
-        .replaceAll("{inf}", "<sub>")
-        .replaceAll("{/inf}", "</sub>")
-        .replaceAll("{sup}", "<sup>")
-        .replaceAll("{/sup}", "</sup>");
+    return text.replaceAll("{it}", "<i>").replaceAll("{/it}", "</i>")
+    .replaceAll("{inf}", "<sub>").replaceAll("{/inf}", "</sub>")
+    .replaceAll("{sup}", "<sup>").replaceAll("{/sup}", "</sup>");
 }
 
 // Loops through certain arrays in random order
