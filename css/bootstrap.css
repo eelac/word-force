@@ -4,6 +4,66 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+
+
+/* Google Search */
+.google-nav {
+  display:table;
+  width:100%;
+}
+.desktop-nav,
+.google-search {
+  display:table-cell;
+  vertical-align:middle;
+  width:50%;
+}
+@media screen and (max-width:767px) {
+.google-nav {
+    display:none;
+}
+}
+
+​​/* Google Custom Search */
+.gsc-control-cse {
+  padding: 10px 0!important;
+}
+.gsc-control-cse.appear {
+  padding: 10px 0 11px!important;
+}
+form.gsc-search-box,
+table.gsc-search-box {
+  margin-bottom:0px!important;
+}
+input.gsc-input {
+  background: none!important;
+}
+.gsc-input-box {
+  background: #ffffff!important;
+  border-color: #ddd!important;
+}
+.gsc-input-box-hover,
+.gsc-input-box-focus {
+  box-shadow:none!important;
+}
+.gsc-search-button,
+.gsib_b {
+  display:none!important;
+}
+.gsib_a {
+  padding:0 0 0 .5em!important;
+}
+.gsc-webResult {
+  line-height: 15px!important;
+}
+.gsc-result .gs-title {
+  height: 100%!important;
+  line-height: 20px!important;
+}
+.gsc-search-box-tools .gsc-search-box .gsc-input {
+    padding-right: 0!important;
+}
+
+
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
