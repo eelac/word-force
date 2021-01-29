@@ -5,7 +5,6 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
-
 /* Google Search */
 .google-nav {
   display:table;
@@ -6627,6 +6626,7 @@ button.close {
 .visible-lg-inline-block {
   display: none !important;
 }
+
 @media (max-width: 767px) {
   .visible-xs {
     display: block !important;

@@ -18,12 +18,12 @@ $("#search-button").click(function(e) {
         // Testing console
         console.log(userVALUE);
         searchWord(userVALUE.trim());
-        clearField("#user-input");
+        clearAll();
     }
 })
 
 // Search through API for the word and database
-function searchWord(userVALUE) {
+function searchWord(userVALUE, dataVALUE) {
     // Dictionary items
     var dictKEY = "?key=e88ef112-883a-4f54-975c-e1af4ff0d8c3";
     var dictURL = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" 
@@ -44,19 +44,39 @@ function searchWord(userVALUE) {
             // Catches any word that doesn't have an etymology array
             alert("Check your spelling and/or enter the base word (ie: 'run' instead of 'running'");
         } else {
+            if(dataVALUE === 1) {
+                clearAll();
+                // Creates and posts definitions and synonyms
+                posting(".post-norse", userVALUE, data);
+                searchThesaurus(userVALUE.toLowerCase().trim(), dataVALUE);
+            } else if(dataVALUE === 2) {
+                clearAll();
+                posting(".post-asian", userVALUE, data);
+                searchThesaurus(userVALUE.toLowerCase().trim(), dataVALUE);
+            } else if(dataVALUE === 3) {
+                clearAll();
+                posting(".post-latin", userVALUE, data);
+                searchThesaurus(userVALUE.toLowerCase().trim(), dataVALUE);
+            } else {
+                clearAll();
+                posting(".post-search", userVALUE, data);
+                searchThesaurus(userVALUE.toLowerCase().trim());
+
+            }
+        }
+
+        function posting(target, userVALUE, data) {
             var etym = uncurl(data[0].et[0][1]);
             // Clears Information field
-            clearField(".post-here");
+            clearField(target);
             // Creates title with userValue
-            postAppend("<h1 class='value-text'>" + userVALUE.toLowerCase().trim() + "</h1>", ".post-here");
+            postAppend("<h1 class='value-text'>" + userVALUE.toLowerCase().trim() + "</h1>", target);
             // Creates Definition
-            postAppend("<strong>Definition:</strong> " + data[0].shortdef, ".post-here");
+            postAppend("<strong>Definition:</strong> " + data[0].shortdef, target);
             // Creates date
-            postAppend("<strong>Date:</strong> " + data[0].date, ".post-here");
+            postAppend("<strong>Date:</strong> " + data[0].date, target);
             // Creates Etymology
-            postAppend("<strong>Etymology:</strong> " + etym, ".post-here");
-            // Creates synonym list
-            searchThesaurus(userVALUE.toLowerCase().trim());
+            postAppend("<strong>Etymology:</strong> " + etym, target);
 
             // Clears history field
             clearField(".history-title-here");
@@ -65,13 +85,14 @@ function searchWord(userVALUE) {
             // Appends userValue into history 
             historyAppend(userVALUE.toLowerCase().trim());
         }
+
     }).fail(function() {
         console.log("failed");
     })
 }
 
 // Thesaurus function
-function searchThesaurus(userVALUE) {
+function searchThesaurus(userVALUE, dataVALUE) {
     // Thesaurus items
     var thesKEY = "?key=a6fccfe6-b8af-43f4-9d56-746368f04ea1";
     var thesURL = "https://www.dictionaryapi.com/api/v3/references/thesaurus/json/" 
@@ -86,18 +107,41 @@ function searchThesaurus(userVALUE) {
     }).done(function(data) {
         console.log(data);
         if(!data[0].meta) {
-            // Clear synonym field
-            clearField(".synonym-here");
-            postAppend("<strong>Synonyms:</strong> No synonyms available.", ".synonym-here");
+            if(dataVALUE === 1) {
+                noSynClearAndAppend(".synonym-norse");
+            } else if(dataVALUE === 2) {
+                noSynClearAndAppend(".synonym-asian");
+            } else if(dataVALUE === 3) {
+                noSynClearAndAppend(".synonym-latin");
+            } else {
+                noSynClearAndAppend(".synonym-search");
+            }
         } else {
-            // Clears synonym field
-            clearField(".synonym-here");
-            var syns = data[0].meta.syns[0];
-            postAppend("<strong>Synonyms:</strong> " + syns.join(", "), ".synonym-here");
+            if(dataVALUE === 1) {
+                synClearAndAppend(".synonym-norse", data);
+            } else if(dataVALUE === 2) {
+                synClearAndAppend(".synonym-asian", data);
+            } else if(dataVALUE === 3) {
+                synClearAndAppend(".synonym-latin", data);
+            } else {
+                synClearAndAppend(".synonym-search", data);
+            }
         }
     }).fail(function() {
         console.log("thesaurus failed");
     })
+}
+
+function noSynClearAndAppend(target) {
+    clearField(target);
+    postAppend("<strong>Synonyms:</strong> No synonyms available.", target);
+}
+
+function synClearAndAppend(target, data) {
+    // Clears synonym field
+    clearField(target);
+    var syns = data[0].meta.syns[0];
+    postAppend("<strong>Synonyms:</strong> " + syns.join(", "), target);
 }
 
 // Click cards start fuctions
@@ -109,21 +153,21 @@ $(".card-show").click(function() {
             "anger", "cake", "viking", "reindeer", "outlaw", "raft", "bumpkin", "awkward", "bag", "dirt", 
             "die", "caboose", "bait", "egg", "coleslaw", "cashier", "dapper", "furlough", "iceberg", "luck"
         ];
-        searchWord(randomLoop(norse));
+        searchWord(randomLoop(norse), dataValue);
     } else if(dataValue === 2) {
         // chinese / japanese
         var chinese = [
             "brainwash", "ketchup", "typhoon", "chowchow", "kumquat", "ramen", "tycoon", "wok", "tofu", "tea", 
             "rickshaw", "karaoke", "emoji", "origami", "sayonara", "wonton", "zen", "shiatsu", "sushi"
         ];
-        searchWord(randomLoop(chinese));
+        searchWord(randomLoop(chinese), dataValue);
     } else {
         // spanish
         var spanish = [
             "banana", "cockroach", "crimson", "mustang", "embargo", "guacamole", "guerrilla", "hurricane", "macho", "mosquito", 
             "patio", "alligator", "tango", "matador", "cargo", "renegade", "vanilla", "bonanza", "tomato", "torque"
         ];
-        searchWord(randomLoop(spanish));
+        searchWord(randomLoop(spanish), dataValue);
     }
 })
 
@@ -197,6 +241,18 @@ function randomLoop(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
 
+// Clear certain fields
 function clearField(object) {
     $(object).text("").val("");
+}
+
+// Clear all function
+function clearAll() {
+    clearField("#user-input");
+    clearField(".post-norse");
+    clearField(".synonym-norse");
+    clearField(".post-asian");
+    clearField(".synonym-asian");
+    clearField(".post-latin");
+    clearField(".synonym-latin");
 }
