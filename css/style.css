@@ -19,3 +19,13 @@
     position: absolute;
     font-size: 1.8rem;
 }
+
+.navbar-brand {
+    color: white;
+}
+
+@media only screen and (max-width: 986px) {
+    .big-text {
+        display: none;
+    }
+}
