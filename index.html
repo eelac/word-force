@@ -11,6 +11,7 @@
     <link href="css/modern-business.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/5a4fb87ca9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -36,30 +37,6 @@
                     <li>
                         <a href="contact.html">Contact</a>
                     </li>
-            <!-- Google Search Begin-->
-                    <li>
-                        <!-- <form method="get" action="http://www.google.com/search">
-
-                            <div style="border:2px dotted black;padding:4px;width:15em;">
-                            <table border="0" align="center" cellpadding="0">
-                            <tr><td>
-                            <input type="text"   name="q" size="25" style="color:#808080;"
-                            maxlength="255" value="Google site search"
-                            onfocus="if(this.value==this.defaultValue)this.value=''; this.style.color='black';" onblur="if(this.value=='')this.value=this.defaultValue; "/>
-                            <input type="submit" value="Go!" />
-                            <input type="hidden" name="sitesearch" value="yoursite.com" /></td></tr>
-                            </table>
-                            </div>
-                            
-                            </form> -->
-                            <form class="form">
-                                <label>Enter a word:</label>
-                                <input type="text" id="user-input" placeholder="Enter a word here">
-                                <button id="search-button">GO!</button>
-                                <div id="fail-message"></div>
-                            </form>
-                    </li>
-            <!-- Google Search End-->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -81,19 +58,19 @@
             <div class="item active">
                 <div class="fill" style="background-image:url('https://www.theactivetimes.com/sites/default/files/images/3_NiagaraFalls_shutterstock_ss.png');"></div>
                 <div class="carousel-caption">
-                    <h2>I do hope you enjoy waterfalls</h2>
+                    <h2>I do hope you enjoy waterfalls.</h2>
                 </div>
             </div>
             <div class="item">
                 <div class="fill" style="background-image:url('https://wallpapercave.com/wp/QL0WBtU.jpg');"></div>
                 <div class="carousel-caption">
-                    <h2>Coding is like space: never ending.</h2>
+                    <h2>Coding is like space...never ending.</h2>
                 </div>
             </div>
             <div class="item">
                 <div class="fill" style="background-image:url('https://cdn-image.departures.com/sites/default/files/styles/responsive_900x600/public/1581019741/header-mt-fuji-cherry-blossoms-JPCHERRYBLOSSOM0220.jpg?itok=HQVBDkju');"></div>
                 <div class="carousel-caption">
-                    <h2>Sometimes relaxation is a key component in coding.</h2>
+                    <h2>Sometimes relaxation is a key component.</h2>
                 </div>
             </div>
         </div>
@@ -111,6 +88,18 @@
     <div class="container">
 
         <!-- Marketing Icons Section -->
+        <h1 class="title-text">Enter a word to search below</h1>
+        <form class="form-group-search">
+            <input type="text" id="user-input" placeholder="Enter a word here">
+            <button id="search-button" class="btn btn-primary">GO!</button>
+            <div id="fail-message"></div>
+        </form>
+
+        <div class="card-append">
+            <div class="post-search"></div>
+            <div class="synonym-search"></div>
+        </div>
+
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
@@ -123,9 +112,9 @@
                         <h4><i class="fab fa-d-and-d fa-2x"></i> Old Norse</h4>
                     </div>
                     <div class="panel-body">
-                        <div class="post-here"></div>
-                        <div class="synonym-here"></div>
-                        <a href="#" class="btn btn-default card-show" data-value="1">Learn More</a>
+                        <div class="post-norse"></div>
+                        <div class="synonym-norse"></div>
+                        <button class="btn btn-default card-show norse" data-value="1">Learn More</button>
                     </div>
                 </div>
             </div>
@@ -135,9 +124,9 @@
                         <h4><i class="fas fa-dragon fa-2x"></i> Chinese / Japanese</h4>
                     </div>
                     <div class="panel-body">
-                        <div class="post-here"></div>
-                        <div class="synonym-here"></div>
-                        <a href="#" class="btn btn-default card-show" data-value="2">Learn More</a>
+                        <div class="post-asian"></div>
+                        <div class="synonym-asian"></div>
+                        <button class="btn btn-default card-show asian" data-value="2">Learn More</button>
                     </div>
                 </div>
             </div>
@@ -147,9 +136,9 @@
                         <h4><i class="fas fa-hat-cowboy-side fa-2x"></i></i> Spanish / Latin</h4>
                     </div>
                     <div class="panel-body">
-                        <div class="post-here"></div>
-                        <div class="synonym-here"></div>
-                        <a href="#" class="btn btn-default card-show" data-value="3">Learn More</a>
+                        <div class="post-latin"></div>
+                        <div class="synonym-latin"></div>
+                        <button class="btn btn-default card-show latin" data-value="3">Learn More</button>
                     </div>
                 </div>
             </div>
@@ -157,7 +146,6 @@
 
         <div class="history-title-here"></div>
         <ul class="history-here"></ul>
-     
 
         <hr>
 
@@ -165,7 +153,7 @@
         <div class="well">
             <div class="row">
                 <div class="col-md-8">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
+                    <p class="big-text">Have any comments or question please leave us some feedback here!</p>
                 </div>
                 <div class="col-md-4">
                     <a class="btn btn-lg btn-primary btn-block" href="contact.html">Feedback?</a>
