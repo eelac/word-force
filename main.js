@@ -30,7 +30,12 @@ $("#search-button").click(function(e) {
             addBG(".card-append", "https://swordskingdom.com/media/catalog/product/cache/1/thumbnail/1000x/17f82f742ffe127f42dca9de82fb58b1/l/i/link-hylian-shield-replica-from-zelda_1.jpg", "contain");
         } else if(formatVal === "owl") {
             addBG(".card-append", "https://i.redd.it/6tm4uuu56et21.png", "contain");
-        } else {
+        } else if(formatVal === "ocarina") {
+            addBG(".card-append", "https://images-na.ssl-images-amazon.com/images/I/516Y2CgGMmL._AC_SL1000_.jpg", "cover");
+        } else if(formatVal === "horse") {
+            addBG(".card-append", "https://oyster.ignimgs.com/mediawiki/apis.ign.com/the-legend-of-zelda-hd/2/29/Epona44.jpg", "700px");
+        }
+        else {
             // Creates background image to the definition card
             var backgroundPics = [
                 "https://storage.pixteller.com/designs/designs-images/2019-03-27/05/simple-background-backgrounds-passion-simple-1-5c9b95bd34713.png",
