@@ -12,8 +12,33 @@ $("#search-button").click(function(e) {
     if(userVALUE == null || userVALUE == "") {
         failMessage(2);
     } else {
+        // Start the manual search
         searchWord(userVALUE.trim());
-        addBG(".card-append", "https://storage.pixteller.com/designs/designs-images/2019-03-27/05/simple-background-backgrounds-passion-simple-1-5c9b95bd34713.png", "cover");
+
+        var formatVal = userVALUE.toLowerCase().trim();
+        if(formatVal === "link" || formatVal === "hero") {
+            addBG(".card-append", "https://www.destructoid.com/ul/560382-ZeldaARt.jpg", "cover");
+        } else if(formatVal === "sword") {
+            addBG(".card-append", "https://assets.kamuicosplay.com/wp-content/uploads/2020/10/Master_Sword_Zelda_BotW_Cosplay_Kamui_2.jpg", "cover");
+        } else if(formatVal === "tunic") {
+            addBG(".card-append", "https://www.smashbros.com/assets_v2/img/fighter/link/main2.png", "contain");
+        } else {
+            // Creates background image to the definition card
+            var backgroundPics = [
+                "https://storage.pixteller.com/designs/designs-images/2019-03-27/05/simple-background-backgrounds-passion-simple-1-5c9b95bd34713.png",
+                "https://storage.pixteller.com/designs/designs-images/2019-03-27/05/simple-background-backgrounds-passion-simple-1-5c9b95d09002a.png",
+                "https://www.teahub.io/photos/full/34-340335_50-beautiful-and-minimalist-presentation-backgrounds-backgrounds-for.jpg",
+                "https://mcdn.wallpapersafari.com/medium/95/21/4mJtkR.jpg",
+                "https://preview.pixlr.com/images/800wm/1143/1/1143133380.jpg",
+                "https://image.freepik.com/free-photo/hand-painted-watercolor-background-with-sky-clouds-shape_24972-1095.jpg",
+                "https://www.plannthat.com/wp-content/uploads/2020/09/2-1.png",
+                "https://www.plannthat.com/wp-content/uploads/2020/09/3-1.png"
+            ];
+
+            addBG(".card-append", randomLoop(backgroundPics), "cover");
+
+        }
+        // Clears everything
         clearAll();
     }
 })
@@ -41,9 +66,9 @@ function searchWord(userVALUE, dataVALUE) {
             // Catches any word that doesn't have an etymology array
             failMessage(3);
         } else {
+            // Creates and posts definitions and synonyms to the correct buttons pressed
             if(dataVALUE === 1) {
                 clearAll();
-                // Creates and posts definitions and synonyms
                 posting(".post-norse", userVALUE, data);
                 searchThesaurus(userVALUE.toLowerCase().trim(), dataVALUE);
                 addBG(".latin-bg", "", "contain");
@@ -114,7 +139,6 @@ function searchThesaurus(userVALUE, dataVALUE) {
         url: thesURL,
         dataType: "json",
     }).done(function(data) {
-        console.log(data);
         if(!data[0].meta) {
             if(dataVALUE === 1) {
                 noSynClearAndAppend(".synonym-norse");
@@ -137,6 +161,7 @@ function searchThesaurus(userVALUE, dataVALUE) {
             }
         }
 
+        // Clears field of synonym and puts default values in
         function noSynClearAndAppend(target) {
             clearField(target);
             postAppend("<strong>Synonyms:</strong> No synonyms available.", target);
@@ -194,6 +219,11 @@ function failMessage(error) {
         target.fadeIn().text("Check your spelling and/or enter the base word (ie: 'run' instead of 'running')").addClass("fail-message");
         target.delay(3500).slideUp().fadeOut(1000);
     }
+
+    // Removes styling when odd words are entered
+    addBG(".card-append", "");
+    addBorder(".post-search", "");
+    addBorder(".card-append", "");
 }
 
 // Fade out an object and fade them back in on hover
