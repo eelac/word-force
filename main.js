@@ -3,6 +3,11 @@ fadingIn(".card-show", "0.6", "1", "0.5s");
 // Removes placeholder on focus of search bar
 onFocusRemoveAttr("#user-input", "placeholder", "Enter word here");
 
+// click on history to search
+$(".card-history").on("click", "li", function() {
+    searchWord($(this).text());
+})
+
 // Click or push enter to work
 $("#search-button").click(function(e) {
     e.preventDefault();
