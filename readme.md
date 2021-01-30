@@ -17,3 +17,5 @@ There are a couple of 'keywords' that can be searched and they will bring up cus
 
 ## Screenshots
 ![Screens of the home page](img/home.png)
+![Screens of the about page](img/about.png)
+![Screens of the contact page](img/contact.png)
