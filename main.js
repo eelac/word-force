@@ -22,6 +22,14 @@ $("#search-button").click(function(e) {
             addBG(".card-append", "https://assets.kamuicosplay.com/wp-content/uploads/2020/10/Master_Sword_Zelda_BotW_Cosplay_Kamui_2.jpg", "cover");
         } else if(formatVal === "tunic") {
             addBG(".card-append", "https://www.smashbros.com/assets_v2/img/fighter/link/main2.png", "contain");
+        } else if(formatVal === "dog" || formatVal === "puppy") {
+            addBG(".card-append", "https://www.doghealth.com/images/Benefits_of_multiple_dogs.jpg", "contain");
+        } else if(formatVal === "cat" || formatVal === "kitten") {
+            addBG(".card-append", "https://www.comfortzone.com/-/media/Images/ComfortZone-NA/US/Blog/mean-cats.jpg?h=800&la=en&w=1000&hash=2BDEE56E415553AE50920E844D20D1BE2B92D2BD", "cover");
+        } else if(formatVal === "shield") {
+            addBG(".card-append", "https://swordskingdom.com/media/catalog/product/cache/1/thumbnail/1000x/17f82f742ffe127f42dca9de82fb58b1/l/i/link-hylian-shield-replica-from-zelda_1.jpg", "contain");
+        } else if(formatVal === "owl") {
+            addBG(".card-append", "https://i.redd.it/6tm4uuu56et21.png", "contain");
         } else {
             // Creates background image to the definition card
             var backgroundPics = [
