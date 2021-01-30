@@ -13,6 +13,7 @@ $("#search-button").click(function(e) {
         failMessage(2);
     } else {
         searchWord(userVALUE.trim());
+        addBG(".card-append", "https://storage.pixteller.com/designs/designs-images/2019-03-27/05/simple-background-backgrounds-passion-simple-1-5c9b95bd34713.png", "cover");
         clearAll();
     }
 })
@@ -180,6 +181,7 @@ $(".card-show").click(function() {
     }
 })
 
+// displays fail messages according to what went wrong
 function failMessage(error) {
     var target = $("#fail-message");
     if(error === 1) {
