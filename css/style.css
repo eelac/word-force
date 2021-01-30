@@ -1,3 +1,7 @@
+li {
+    list-style: none;
+}
+
 .form-group-search {
     display: flex;
     justify-content: center;
@@ -6,6 +10,24 @@
 
 #user-input {
     width: 500px;
+}
+
+#fail-message-container {
+    display: flex;
+    justify-content: center;
+}
+
+.fail-message {
+    padding: 1.5rem;
+    margin-top: 1rem;
+    background-color: red;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.panel-heading {
+    display: flex;
+    justify-content: space-between;
 }
 
 .title-text {
@@ -20,8 +42,38 @@
     font-size: 1.8rem;
 }
 
-.navbar-brand {
-    color: white;
+.card-history,
+.card-append {
+    margin-top: 2rem;
+    padding: 0 0 2rem 2rem;
+    line-height: 2;
+}
+
+.post-norse,
+.synonym-norse,
+.post-asian,
+.synonym-asian,
+.post-latin,
+.synonym-latin {
+    font-weight: 400;
+    text-shadow: 1px 1px 10px gray;
+}
+
+.card-history {
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+audio {
+    display: flex;
+    margin: 0 auto;
+    background-color: white;
 }
 
 @media only screen and (max-width: 986px) {

@@ -2,6 +2,10 @@
 
 var audio = document.getElementById('audio');
 
+// lowers volume 
+
+audio.volume = 0.1;
+
 // html5 function - toggle play/pause btn and audio
 
 $("#plays_btn").click(function() {

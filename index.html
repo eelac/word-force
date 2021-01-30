@@ -12,8 +12,6 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/5a4fb87ca9.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
-    <link href="css/music.css" rel="stylesheet">
-    <script src="js/music.js"></script>
 </head>
 
 <body>
@@ -28,7 +26,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">The Legend of Worda</a>
+                <a class="navbar-brand" href="index.html"><i class="fas fa-journal-whills"></i>&nbsp;The Legend of Worda</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -88,23 +86,18 @@
 
     <!-- Page Content -->
     <div class="container">
-        
-
-        <audio controls autoplay>
-            <source src="audio/01_Intro.mp3" type="audio/mpeg">
-            <div style="border: 1px solid black ; padding: 8px ;">
-            </div>
-            </audio>
-
-            
 
         <!-- Marketing Icons Section -->
         <h1 class="title-text">Enter a word to search below</h1>
         <form class="form-group-search">
             <input type="text" id="user-input" placeholder="Enter a word here">
             <button id="search-button" class="btn btn-primary">GO!</button>
-            <div id="fail-message"></div>
         </form>
+
+        <div id="fail-message-container">
+            <div id="fail-message"></div>
+        </div>
+
 
         <div class="card-append">
             <div class="post-search"></div>
@@ -121,11 +114,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4><i class="fab fa-d-and-d fa-2x"></i> Old Norse</h4>
+                        <button class="btn btn-default card-show norse" data-value="1">Random</button>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body norse-bg">
                         <div class="post-norse"></div>
                         <div class="synonym-norse"></div>
-                        <button class="btn btn-default card-show norse" data-value="1">Learn More</button>
                     </div>
                 </div>
             </div>
@@ -133,11 +126,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4><i class="fas fa-dragon fa-2x"></i> Chinese / Japanese</h4>
+                        <button class="btn btn-default card-show asian" data-value="2">Random</button>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body asian-bg">
                         <div class="post-asian"></div>
                         <div class="synonym-asian"></div>
-                        <button class="btn btn-default card-show asian" data-value="2">Learn More</button>
                     </div>
                 </div>
             </div>
@@ -145,18 +138,20 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4><i class="fas fa-hat-cowboy-side fa-2x"></i></i> Spanish / Latin</h4>
+                        <button class="btn btn-default card-show latin" data-value="3">Random</button>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body latin-bg">
                         <div class="post-latin"></div>
                         <div class="synonym-latin"></div>
-                        <button class="btn btn-default card-show latin" data-value="3">Learn More</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="history-title-here"></div>
-        <ul class="history-here"></ul>
+        <div class="card-history">
+            <div class="history-title-here"></div>
+            <ul class="history-here"></ul>
+        </div>
 
         <hr>
 
@@ -178,7 +173,11 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>2021 &copy; The Legend of Worda </p>
+                    <audio controls autoplay id="audio">
+                        <source src="audio/01_Intro.mp3" type="audio/mpeg">
+                        <div style="border: 1px solid black ; padding: 8px ;"></div>
+                    </audio>
+                    <p class="footer">2021 &copy; The Legend of Worda </p>
                 </div>
             </div>
         </footer>
@@ -198,6 +197,7 @@
         interval: 5000 //changes the speed
     })
     </script>
+    <script src="js/music.js"></script>
     <script src="main.js"></script>
 
 </body>
