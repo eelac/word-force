@@ -92,8 +92,12 @@
         <form class="form-group-search">
             <input type="text" id="user-input" placeholder="Enter a word here">
             <button id="search-button" class="btn btn-primary">GO!</button>
-            <div id="fail-message"></div>
         </form>
+
+        <div id="fail-message-container">
+            <div id="fail-message"></div>
+        </div>
+
 
         <div class="card-append">
             <div class="post-search"></div>
@@ -111,10 +115,10 @@
                     <div class="panel-heading">
                         <h4><i class="fab fa-d-and-d fa-2x"></i> Old Norse</h4>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body norse-bg">
                         <div class="post-norse"></div>
                         <div class="synonym-norse"></div>
-                        <button class="btn btn-default card-show norse" data-value="1">Learn More</button>
+                        <button class="btn btn-default card-show norse" data-value="1">Random Word</button>
                     </div>
                 </div>
             </div>
@@ -123,10 +127,10 @@
                     <div class="panel-heading">
                         <h4><i class="fas fa-dragon fa-2x"></i> Chinese / Japanese</h4>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body asian-bg">
                         <div class="post-asian"></div>
                         <div class="synonym-asian"></div>
-                        <button class="btn btn-default card-show asian" data-value="2">Learn More</button>
+                        <button class="btn btn-default card-show asian" data-value="2">Random Word</button>
                     </div>
                 </div>
             </div>
@@ -135,17 +139,19 @@
                     <div class="panel-heading">
                         <h4><i class="fas fa-hat-cowboy-side fa-2x"></i></i> Spanish / Latin</h4>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body latin-bg">
                         <div class="post-latin"></div>
                         <div class="synonym-latin"></div>
-                        <button class="btn btn-default card-show latin" data-value="3">Learn More</button>
+                        <button class="btn btn-default card-show latin" data-value="3">Random Word</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="history-title-here"></div>
-        <ul class="history-here"></ul>
+        <div class="card-history">
+            <div class="history-title-here"></div>
+            <ul class="history-here"></ul>
+        </div>
 
         <hr>
 
