@@ -34,8 +34,9 @@ $("#search-button").click(function(e) {
             addBG(".card-append", "https://images-na.ssl-images-amazon.com/images/I/516Y2CgGMmL._AC_SL1000_.jpg", "cover");
         } else if(formatVal === "horse") {
             addBG(".card-append", "https://oyster.ignimgs.com/mediawiki/apis.ign.com/the-legend-of-zelda-hd/2/29/Epona44.jpg", "700px");
-        }
-        else {
+        } else if(formatVal === "legend") {
+            addBG(".card-append", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu60QWuK0528q68fuxONSf4LtUDVoOOuuG3w&usqp=CAU", "contain");
+        } else {
             // Creates background image to the definition card
             var backgroundPics = [
                 "https://storage.pixteller.com/designs/designs-images/2019-03-27/05/simple-background-backgrounds-passion-simple-1-5c9b95bd34713.png",

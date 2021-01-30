@@ -25,6 +25,11 @@ li {
     color: #fff;
 }
 
+.panel-heading {
+    display: flex;
+    justify-content: space-between;
+}
+
 .title-text {
     display: flex;
     justify-content: center;
