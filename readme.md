@@ -7,7 +7,7 @@ There are a couple of 'keywords' that can be searched and they will bring up cus
 
 ## Links
 [Link to github](https://github.com/sksmejn/word-force)
-[link to Webpage]()
+[link to Webpage](https://sksmejn.github.io/word-force/)
 
 ## Tools and technologies
 - Languages: HTML, CSS, JS
